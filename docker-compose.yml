@@ -1,0 +1,37 @@
+version: '3'
+
+services:
+
+  php-fpm:
+    build:
+      context: ./php-fpm
+    volumes:
+        - ./src:/var/www
+    expose:
+      - "9000"
+
+  nginx:
+    build:
+      context: ./nginx
+    volumes:
+      - ./src:/var/www
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/sites/:/etc/nginx/sites-available
+      - ./nginx/conf.d/:/etc/nginx/conf.d
+    depends_on:
+      - php-fpm
+    ports:
+      - "81:80"
+
+  database:
+      build:
+        context: ./database
+      environment:
+      - MYSQL_DATABASE=test
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=secret
+      - MYSQL_ROOT_PASSWORD=docker  
+      ports:
+        - "3316:3306"
+      volumes:
+      - ./data:/var/lib/mysql
