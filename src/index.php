@@ -22,6 +22,7 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 <html>
     <body>
         <h1>Hello, <?= $value ?>!</h1>
+        <h1>Try this API</h1>
 
 <!--        --><?php //foreach($databaseTest as $row): ?>
 <!--            <p>Hello, --><?//= $row->name ?><!--</p>-->
