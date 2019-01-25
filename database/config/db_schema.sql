@@ -7,7 +7,7 @@ FLUSH PRIVILEGES;
 
 CREATE TABLE IF NOT EXISTS `test`.`users` ( 
 `id` int(11) nOT NULL AUTO_INCREMENT,
-`fistname` varchar(256) NOT NULL,
+`firstname` varchar(256) NOT NULL,
 `lastname` varchar(256) NOT NULL,
 `email` varchar(256) NOT NULL,
 `password` varchar(256) NOT NULL,
