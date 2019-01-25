@@ -29,7 +29,10 @@ if( !empty($_POST["firstname"]) &&
     $user->password     = $_POST["password"];
     $user->created      = date('Y-m-d H:i:s');
 
-    // create the category
+    /**
+     * ONLY CERTAIN USERS (ADMINS) SHOULD BE ABLE TO CREATE USERS
+     */
+    // create the user
     if($user->create()){
         http_response_code(201);
         echo json_encode(array("message" => "User was created successfully."));

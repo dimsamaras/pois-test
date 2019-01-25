@@ -36,4 +36,4 @@ The project is developed and organized as:
 
  - Detach Business Logic from the objects 
  - API request throttling
- - Write Tests
+ - Tests

@@ -18,6 +18,9 @@ $user = new User($conn);
 if(!empty($_POST["id"])){
     $user->id = $_POST["id"];
 
+    /**
+     * ONLY CERTAIN USERS (ADMINS) SHOULD BE ABLE TO CREATE USERS
+     */
     if ($user->delete()) {
         http_response_code(200);
         echo json_encode(array("message" => "User was deleted."));
