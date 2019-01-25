@@ -123,12 +123,14 @@ class User{
 
     function exists($email = null){
         if ($email) {
-            $query = "SELECT u.id
+            $email = htmlspecialchars(strip_tags($email));
+
+            $query = "SELECT *
                     FROM " . $this->table_name . " u
                     WHERE u.email = '" . $email . "'
                     LIMIT 0,1";
         }else {
-            $query = "SELECT u.id
+            $query = "SELECT *
                     FROM " . $this->table_name . " u
                     WHERE u.id = {$this->id}
                     LIMIT 0,1";
@@ -138,6 +140,35 @@ class User{
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($row['id']){
+            $this->id           = $row['id'];
+            $this->firstname    = $row['firstname'];
+            $this->lastname     = $row['lastname'];
+            $this->password     = $row['password'];
+            $this->email        = $row['email'];
+            return true;
+        }
+
+        return false;
+    }
+
+    function verify($email, $password)
+    {
+        $query = "SELECT id FROM " . $this->table_name . "
+                  WHERE email = :email AND password = :password";
+
+        $stmt = $this->conn->prepare($query);
+
+        $email=htmlspecialchars(strip_tags($email));
+        $password=htmlspecialchars(strip_tags($password));
+        $stmt->bindParam(':email', $email);
+
+        $password_hash = password_hash($password, PASSWORD_BCRYPT);
+        $stmt->bindParam(':password', $password_hash);
+        $stmt->execute();
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($row['id']){
+            $this->id = $row['id'];
             return true;
         }
 
