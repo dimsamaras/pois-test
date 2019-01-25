@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS `test`.`users` (
 `lastname` varchar(256) NOT NULL,
 `email` varchar(256) NOT NULL,
 `password` varchar(256) NOT NULL,
-`created` datetime NOT NULL,
+`created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
 `modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS `test`.`pois` (
   `category` varchar(256) NOT NULL,
   `latitude` DECIMAL(10, 8) NOT NULL, 
   `longitude` DECIMAL(11, 8) NOT NULL,
-  `created` datetime NOT NULL,
+  `created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
@@ -30,8 +30,7 @@ CREATE TABLE IF NOT EXISTS `test`.`pois` (
 CREATE TABLE IF NOT EXISTS `test`.`categories` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(256) NOT NULL,
-  `category` varchar(256) NOT NULL,
-  `created` datetime NOT NULL,
+  `created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
@@ -43,11 +42,13 @@ INSERT INTO `pois` (`id`, `name`, `category`, `latitude`, `longitude`, `created`
 (7, 'Thessaloniki', '1', 40.736851, 22.920227, '2019-01-02 10:10:12', '2019-01-02 10:10:12'),
 (16, 'Raches', '2', 38.8693654, 22.7557458, '2019-01-10 10:10:12', '2019-01-01 10:12:26'),
 (34, 'Zagkliveri', '2', 40.5718221, 23.285064, '2019-01-10 10:10:12', '2019-01-10 10:10:12'),
-(60, 'Los Angeles', '3', 34.0201613, -118.6919148, '2019-01-24 10:10:12', '2019-01-24 10:10:12');
+(60, 'Los Angeles', '8', 34.0201613, -118.6919148, '2019-01-24 10:10:12', '2019-01-24 10:10:12');
 
 INSERT INTO `categories` (`id`, `name`,`created`, `modified`) VALUES
-(1, ' greek city',  '2019-01-02 05:12:26', '2019-01-02 05:12:26'),
-(2, ' greek village', '2019-01-01 06:12:26', '2019-01-01 06:12:26'),
-(3, 'abroad city','2019-01-07 10:10:12', '2019-01-07 10:10:12'),
-(3, 'abroad village','2019-01-09 10:10:12', '2019-01-09 10:10:12')
+(1, 'greek city',  '2019-01-02 05:12:26', '2019-01-02 05:12:26'),
+(2, 'greek village', '2019-01-01 06:12:26', '2019-01-01 06:12:26'),
+(3, 'european city','2019-01-07 10:10:12', '2019-01-07 10:10:12'),
+(5, 'european village','2019-01-09 10:10:12', '2019-01-09 10:10:12'),
+(8, 'american city','2019-01-25 10:10:12', '2019-01-25 10:10:12'),
+(9, 'american village','2019-01-25 10:10:12', '2019-01-25 10:10:12');
 

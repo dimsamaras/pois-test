@@ -1,5 +1,4 @@
 <?php
-
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Methods: POST");
@@ -15,20 +14,18 @@ $conn = $db->getConnection();
 
 // initialize the poi object
 $category = new Category($conn);
-// make sure necessary data is not empty
-if( !empty($_POST["name"])){
-    $category->name = $_POST["name"];
-    $category->created = date('Y-m-d H:i:s');
 
-    // create the category
-    if($category->create()){
-        http_response_code(201);
-        echo json_encode(array("message" => "Category was created successfully."));
-    } else{
+if(!empty($_POST["id"])){
+    $category->id = $_POST["id"];
+
+    if ($category->delete()) {
+        http_response_code(200);
+        echo json_encode(array("message" => "Category was deleted."));
+    }else {
         http_response_code(503);
-        echo json_encode(array("message" => "Unable to create category."));
+        echo json_encode(array("message" => "Unable to delete category."));
     }
 }else{
-    http_response_code(400);
-    echo json_encode(array("message" => "Unable to create Category. Data is incomplete."));
+    http_response_code(503);
+    echo json_encode(array("message" => "You need to specify a category id."));
 }
