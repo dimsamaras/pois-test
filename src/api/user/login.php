@@ -33,7 +33,8 @@ if( !empty($_POST["email"]) &&
         "iat" => $iat,
         "nbf" => $nbf,
         "data" => array(
-            "id" => $user->id
+            "id" => $user->id,
+            "email"=>$user->email
         )
     );
 
