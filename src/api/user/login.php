@@ -9,10 +9,10 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 include_once '../config/db.php';
 include_once '../config/settings.php';
 include_once '../objects/user.php';
-include_once '../libs/php-jwt/src/BeforeValidException.php';
-include_once '../libs/php-jwt/src/ExpiredException.php';
-include_once '../libs/php-jwt/src/SignatureInvalidException.php';
-include_once '../libs/php-jwt/src/JWT.php';
+include_once '../libs/php-jwt-master/src/BeforeValidException.php';
+include_once '../libs/php-jwt-master/src/ExpiredException.php';
+include_once '../libs/php-jwt-master/src/SignatureInvalidException.php';
+include_once '../libs/php-jwt-master/src/JWT.php';
 use \Firebase\JWT\JWT;
 
 $db = new db();

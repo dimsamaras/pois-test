@@ -9,16 +9,16 @@ The project is developed and organized as:
 
 ### Installation Steps
 
-  - [Install docker-compose](https://docs.docker.com/compose/install/) on your local machine 
+  - [Install docker-compose](https://docs.docker.com/compose/install/) on your local machine.
   - [Clone] (https://git-scm.com/docs/git-clone) the project using: ```https://github.com/dimsamaras/pois-test.git```
-    or download throught the download ZIP option found at the upper right section
-  - Place the project to the destination folder
-  - Build the docker-compose project 
+    or download through the download ZIP option found at the upper right section (could cause permissions conflicts).
+  - Place the project to the destination folder.
+  - Build the docker-compose project.
     ```sh
     $ cd folder_with_the_project 
     $ docker-compose build
     ```
-  - Run the docker-compose project 
+  - Run the docker-compose project. 
     ```sh
     $ docker-compose up
     ```
@@ -26,7 +26,7 @@ The project is developed and organized as:
     ```sh
     $ docker-compose up -d
     ```
-  - Access the API at localhost:81/api/... using PostMan or via your web browser
+  - Access the API at [localhost:81/api/...](localhost:81) using PostMan or via your web browser
 
 ### Provisioning
 

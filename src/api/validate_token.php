@@ -1,10 +1,10 @@
 <?php
 
 include_once 'config/settings.php';
-include_once 'libs/php-jwt/src/BeforeValidException.php';
-include_once 'libs/php-jwt/src/ExpiredException.php';
-include_once 'libs/php-jwt/src/SignatureInvalidException.php';
-include_once 'libs/php-jwt/src/JWT.php';
+include_once 'libs/php-jwt-master/src/BeforeValidException.php';
+include_once 'libs/php-jwt-master/src/ExpiredException.php';
+include_once 'libs/php-jwt-master/src/SignatureInvalidException.php';
+include_once 'libs/php-jwt-master/src/JWT.php';
 use \Firebase\JWT\JWT;
 
 function validate($jwt)
