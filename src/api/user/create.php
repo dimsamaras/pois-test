@@ -29,13 +29,10 @@ if( !empty($_POST["firstname"]) &&
     $user->password     = $_POST["password"];
     $user->created      = date('Y-m-d H:i:s');
 
-    /**
-     * ONLY CERTAIN USERS (ADMINS) SHOULD BE ABLE TO CREATE USERS
-     */
     // create the user
     if($user->create()){
         http_response_code(201);
-        echo json_encode(array("message" => "User was created successfully."));
+        echo json_encode(array("id"=>$user->id, "message" => "User was created successfully."));
     } else{
         http_response_code(503);
         echo json_encode(array("message" => "Unable to create user."));

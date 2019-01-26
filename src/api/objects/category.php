@@ -63,6 +63,7 @@ class Category{
         $stmt->bindParam(":created", $this->created);
 
         if($stmt->execute()){
+            $this->id = $this->conn->lastInsertId();
             return true;
         }
 

@@ -35,7 +35,7 @@ if(
     // create the poi
     if($poi->create()){
         http_response_code(201);
-        echo json_encode(array("message" => "Poi was created successfully."));
+        echo json_encode(array("id" => $poi->id, "message" => "Poi was created successfully."));
     } else{
         http_response_code(503);
         echo json_encode(array("message" => "Unable to create poi."));

@@ -93,6 +93,7 @@ class Poi{
         $stmt->bindParam(":created", $this->created);
 
         if($stmt->execute()){
+            $this->id = $this->conn->lastInsertId();
             return true;
         }
 
@@ -230,6 +231,7 @@ class Poi{
         if (!$this->longitude || !$this->longitude) {
             return [];
         }
+        // https://www.movable-type.co.uk/scripts/latlong.html
         // https://gis.stackexchange.com/questions/31628/find-points-within-a-distance-using-mysql
         $query = "SELECT p.id, p.name, p.latitude, p.longitude, p.created, p.modified, c.name as category_name, (
                         6371 * acos (

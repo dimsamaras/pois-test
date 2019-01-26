@@ -26,7 +26,7 @@ if( !empty($_POST["name"])){
     // create the category
     if($category->create()){
         http_response_code(201);
-        echo json_encode(array("message" => "Category was created successfully."));
+        echo json_encode(array("id"=>$category->id,"message" => "Category was created successfully."));
     } else{
         http_response_code(503);
         echo json_encode(array("message" => "Unable to create category."));
