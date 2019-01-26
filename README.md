@@ -7,7 +7,7 @@ The project is developed and organized as:
   - Stack: PHP-FPM, NGINX, MySQL
   - Infrastructure: Docker, Docker-Compose
 
-### Steps
+### Installation Steps
 
   - [Install docker-compose](https://docs.docker.com/compose/install/) on your local machine 
   - [Clone] (https://git-scm.com/docs/git-clone) the project using: ```https://github.com/dimsamaras/pois-test.git```
@@ -30,7 +30,7 @@ The project is developed and organized as:
 
 ### Provisioning
 
-#### Infra
+#### Infrastructure
 
   - Any changes on the infrastructure can be performed on the docker-compose.yml file regarding the source location and ports binding and the containers.
     - MySQL is exposed on port 3316.
@@ -39,33 +39,33 @@ The project is developed and organized as:
     
 #### Data
 
-  - 
+  - In the database/config folder the ```db_schema.sql``` has all the required sql queries to provision the database if not run successfully on project build.
 
 ### API calls 
 
-All API calls return JSON formatted responses.
+-- All API calls return JSON formatted responses.
 
-The API user authorization is demonstrated in the 'categories' API requests, where the JWT token is requested in every call.
+-- The API user authorization is demonstrated in the 'categories' API requests, where the JWT token is requested in every call.
 
-In order to handle efficiently large number of results 'retrieve_all' POI request is returned paginated.
+-- In order to handle efficiently large number of results 'retrieve_all' POI request is returned paginated.
 #### a. User
 
 POST localhost:81/api/user/create
-   - accepts: firstname, lastname, email, password
+   - requires: firstname, lastname, email, password
    - returns: Status code 201,503,400 along with the newly created id and a message
     
 POST localhost:81/api/user/delete
-   - accepts: id
+   - requires: id
    - returns: Status code 200,503 along with a message
  
 POST localhost:81/api/user/login
-   - accepts: email, password
+   - requires: email, password
    - returns: Status code 201,401 along with a message and the JWT token for the rest of the requests authorization.
     
 #### b. POI
 
 POST localhost:81/api/poi/create
-   - accepts: name, latitude, longitude, category (category id)
+   - requires: name, latitude, longitude, category (category id)
    - returns: Status code 201,503 along with the newly created id and a message
    
    ```sh
@@ -76,7 +76,7 @@ POST localhost:81/api/poi/create
 ```
        
 POST localhost:81/api/poi/delete
-   - accepts: id
+   - requires: id
    - returns: Status code 200,503 along with a message
    
    ```sh
@@ -85,7 +85,7 @@ POST localhost:81/api/poi/delete
    }
 ```
 GET localhost:81/api/poi/retrieve_all
-   - accepts:
+   - requires:
    - returns: Status code 200,404 along with a JSON:
    
      ```sh
@@ -123,7 +123,7 @@ GET localhost:81/api/poi/retrieve_all
      ```
     
 GET localhost:81/api/poi/retrieve_one?id=ZZ
-   - accepts: id
+   - requires: id
    - returns: Status code 200,404 along with a JSON:
    
    ```sh
@@ -141,7 +141,9 @@ GET localhost:81/api/poi/retrieve_one?id=ZZ
 ```   
 
 GET localhost:81/api/poi/retrieve_by_location?lat=XX&lng=YY&distance=WW
-   - accepts: latitude, longitude, distance (range in KM that the POIs are away from the point)
+   - requires: latitude, longitude, 
+   
+     distance (optional, range in KM that the POIs are away from the point. Defaults to 100)
    - returns: Status code 200,404 along with a message 
    
    ```sh
@@ -171,7 +173,7 @@ GET localhost:81/api/poi/retrieve_by_location?lat=XX&lng=YY&distance=WW
 #### c. Category
  
 POST localhost:81/api/category/create
-   - accepts: name, Authorization (JWT token provided from login) in the header
+   - requires: name, Authorization (JWT token provided from login) in the header
    - returns: Status code 201,503 along with the newly created id and a message
    
    ```sh
@@ -182,7 +184,7 @@ POST localhost:81/api/category/create
 ```
        
 POST localhost:81/api/category/delete
-   - accepts: id,  Authorization (JWT token provided from login) in the header
+   - requires: id,  Authorization (JWT token provided from login) in the header
    - returns: Status code 200,503 along with a message
    
    ```sh
@@ -192,7 +194,7 @@ POST localhost:81/api/category/delete
 ```
 
 GET localhost:81/api/category/retrieve_all
-   - accepts: Authorization (JWT token provided from login) in the header
+   - requires: Authorization (JWT token provided from login) in the header
    - returns: Status code 200,404 along with a JSON payload
 ```sh
 {
