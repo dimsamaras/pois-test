@@ -272,4 +272,96 @@ class Poi{
         }
         return $pois;
     }
+
+    function retrieve_paging($offset, $limit, $url, $page)
+    {
+        $query = "SELECT p.id, p.name, p.latitude, p.longitude, p.created, p.modified, c.name as category_name
+                    FROM {$this->table_name} p
+                    LEFT JOIN categories c
+                      ON c.id = p.category
+                    ORDER BY p.created ASC
+                    LIMIT {$offset}, {$limit}";
+
+        $stmt = $this->conn->prepare($query);
+
+        $stmt->execute();
+
+        // check if pois exist in the db.
+        $num = $stmt->rowCount();
+        $pois = array();
+        if ($num > 0) {
+            $pois["pois"] = array();
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $single_poi = array(
+                    "id"            => $row['id'],
+                    "name"          => $row['name'],
+                    "latitude"      => $row['latitude'],
+                    "longitude"     => $row['longitude'],
+                    "category_name" => $row['category_name']
+                );
+
+                array_push($pois["pois"], $single_poi);
+            }
+        }
+
+        // include paging
+        $total_rows     = $this->count();
+        $page_url       = "{$url}poi/retrieve_all?";
+        $paging         = $this->getPaging($page, $total_rows, $limit, $page_url);
+        $pois["paging"] =$paging;
+
+        return $pois;
+    }
+
+    private function count(){
+        $query = "SELECT COUNT(*) as total_rows FROM " . $this->table_name;
+
+        $stmt = $this->conn->prepare( $query );
+        $stmt->execute();
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        return $row['total_rows'];
+    }
+
+    private function getPaging($page, $total_rows, $records_per_page, $page_url){
+
+        // paging array
+        $paging_arr=array();
+
+        //total results
+        $paging_arr["total_results"] = $total_rows;
+
+        //first page
+        $paging_arr["first"] = "{$page_url}page=1";
+
+        // count all pois in the database to calculate total pages
+        $total_pages = ceil($total_rows / $records_per_page);
+
+        // range of links to show
+        $range = 1;
+
+        // display links to 'range of pages' around 'current page'
+        $initial_num = $page - $range;
+        $condition_limit_num = ($page + $range)  + 1;
+
+        $paging_arr['pages']=array();
+        $page_count=0;
+
+        for($x=$initial_num; $x<$condition_limit_num; $x++){
+            // be sure '$x is greater than 0' AND 'less than or equal to the $total_pages'
+            if(($x > 0) && ($x <= $total_pages)){
+                $paging_arr['pages'][$page_count]["page"]=$x;
+                $paging_arr['pages'][$page_count]["url"]="{$page_url}page={$x}";
+                $paging_arr['pages'][$page_count]["current_page"] = $x==$page ? "yes" : "no";
+
+                $page_count++;
+            }
+        }
+
+        // button for last page
+        $paging_arr["last"] = "{$page_url}page={$total_pages}";
+
+        // json format
+        return $paging_arr;
+    }
 }

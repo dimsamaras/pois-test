@@ -11,3 +11,9 @@ $iss = "http://example.org";
 $aud = "http://example.com";
 $iat = 1356999524;
 $nbf = 1357000000;
+
+// variables used for pagination
+$url    = $_SERVER['HTTP_HOST']."/api/";
+$page   = isset($_GET['page']) ? $_GET['page'] : 1;
+$limit  = 5;
+$offset = ($limit * $page) - $limit;

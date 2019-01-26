@@ -5,7 +5,6 @@ header("Content-Type: application/json; charset=UTF-8");
 
 // include database and required object files
 include_once '../config/db.php';
-include_once '../config/settings.php';
 include_once '../objects/poi.php';
 
 $db = new db();
@@ -15,7 +14,7 @@ $conn = $db->getConnection();
 $poi = new Poi($conn);
 
 // retrieve pois
-$pois = $poi->retrieve_paging($offset, $limit, $url, $page);
+$pois = $poi->retrieve();
 
 if(!empty($pois)){
     http_response_code(200);
