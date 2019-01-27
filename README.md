@@ -238,5 +238,8 @@ GET localhost:81/api/category/retrieve_all
  - Detach Business Logic from the objects 
  - (BL) User Create should be enabled only for Admin users, as well as User Delete
  - API request throttling
+ - Full OAUTH2 implementation encapsulating the tokens
+ - Cache the responses
+ - DB specialized in Geo data?
  - DB Indexing
  - Tests
