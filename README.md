@@ -1,5 +1,9 @@
 # A RESTful web service for representing Points of Interests (POI)
 
+> POIs represent cities (characterized by id, name, latitude, longitude and a category). POIs belong to categories 
+> (characterized by id and name). Finally User can access this API (characterized by id, firstname, lastname and email. They
+> also have passwords). 
+
 The project is developed and organized as:
 
   - Programming language: PHP
@@ -39,15 +43,17 @@ The project is developed and organized as:
     
 #### Data
 
+  - Pois, Categories and Users are the 3 tables that exist. Except from the fields mentioned in the introduction all tables contain a creation and modification date (timestamp).
   - In the database/config folder the ```db_schema.sql``` has all the required sql queries to provision the database if not run successfully on project build.
 
 ### API calls 
 
 -- All API calls return JSON formatted responses.
 
--- The API user authorization is demonstrated in the 'categories' API requests, where the JWT token is requested in every call.
+-- The API user authorization is demonstrated in the 'categories' API requests, where the JWT token is requested in every call. Similarly every request should require the authorization header with exception to the user/login and user/create.
 
--- In order to handle efficiently large number of results 'retrieve_all' POI request is returned paginated.
+-- In order to handle efficiently large number of results 'retrieve_all' POI request is returned paginated. Similarly every 'retrieve' request in the categories and pois domain should be paginated.
+
 #### a. User
 
 POST localhost:81/api/user/create
