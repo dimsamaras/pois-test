@@ -241,5 +241,5 @@ GET localhost:81/api/category/retrieve_all
  - Full OAUTH2 implementation encapsulating the tokens
  - Cache the responses
  - DB specialized in Geo data?
- - DB Indexing
+ - DB Indexing (spatial indexing)
  - Tests
