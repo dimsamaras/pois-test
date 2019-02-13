@@ -241,6 +241,8 @@ GET localhost:81/api/category/retrieve_all
    
 ### Todos
 
+ - Configure Xdebug ...
+
  - Detach Business Logic from the objects 
  - (BL) User Create should be enabled only for Admin users, as well as User Delete
  - API request throttling
