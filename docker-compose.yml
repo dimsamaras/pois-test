@@ -7,6 +7,9 @@ services:
       context: ./php-fpm
     volumes:
         - ./src:/var/www
+        - ./php-fpm/php.ini:/etc/php7/conf.d/50-setting.ini
+        - ./php-fpm/php-fpm.conf:/etc/php7/php-fpm.conf
+        - ./php-fpm/xdebug.ini:/etc/php7/conf.d/xdebug.ini
     expose:
       - "9000"
 
